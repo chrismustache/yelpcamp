@@ -1,0 +1,16 @@
+<%- layout('layouts/boilerplate') -%>
+    <h1>Login</h1>
+    <section class="card text-bg-light">
+        <form  action="/login" method="POST" novalidate>
+            <div class="mb-3">
+                <label for="email" class="form-label">Username</label>
+                <input type="text" class="form-control" name ="email" id="username-input">
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Password</label>
+                <input type="password" class="form-control" name="password" id="password-input">
+            </div>
+    
+            <button type="submit" class="btn btn-primary">Submit</button>
+        </form>
+    </section>

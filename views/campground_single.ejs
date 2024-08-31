@@ -1,0 +1,83 @@
+<%- layout('layouts/boilerplate') -%>
+<body>
+  <div class="row gx-3">
+    <div class="card my-3 col-6">
+      
+        <img src="<%= campground.Images %>" class="card-img-top" >
+        <div class="card-body">
+          <h1 class="card-title"><%= campground.name %></h1>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item"><span class="fw-semibold">Location: </span><%= campground.location %></li>
+            <li class="list-group-item"><span class="fw-semibold">Price: </span>€<%= campground.price %>/night</li>
+            <li class="list-group-item"><span class="fw-semibold">Description: </span><%= campground.description %></li>
+            <li class="list-group-item"><span class="fw-semibold">Submitted by: </span><%= campground.author.username %></li>
+          </ul>
+          <% if (currentUser && campground.author.username === currentUser.username ) { %>
+            <a href="/campgrounds/<%= campground._id %>/edit" class="btn btn-primary">Edit campground</a>
+            <form class="d-inline" action="/campgrounds/<%= campground._id %>?_method=DELETE" method="POST">
+              <button type="submit" class="btn btn-primary">Delete campground</button>
+            </form>
+          <% } %>
+        </div>
+    </div> 
+    
+    <div class="card my-3 col-6">
+      <h2>Reviews</h2>
+        <% if (campground.reviews.length === 0) { %>
+          <p>No reviews.</p>
+        <% } else { %>
+          <ul class="list-group list-group-flush">
+            <% for (let campReview of campground.reviews) { %>
+            <li class="list-group-item">
+              <p class="starability-result" data-rating="<%= campReview.rating %>">
+                Rated <%= campReview.rating %> stars
+              </p>
+      
+              <p class="card-text"><%= campReview.body %></p>
+              <p class="card-text"><%= campReview.author.username %></p>
+              <% if (currentUser)  { %>
+              <form action="/campgrounds/<%= campground._id %>/reviews/<%= campReview._id %>?_method=DELETE" method="POST">
+                <button type="Delete" class="btn btn-danger">Delete</button>
+              </form>
+              <% } %>
+            </li>
+            <% } %>
+          </ul>
+        <% } %>
+        
+      <h2>Leave a review</h2>
+      <% if (currentUser)  { %>
+        <form action="/campgrounds/<%= campground._id %>/reviews/" method="POST">
+        <fieldset class="starability-basic">
+          <input type="radio" id="no-rate" class="input-no-rate" name="review[rating]" value="0" checked aria-label="No rating." />
+          <input type="radio" id="first-rate1" name="review[rating]" value="1" checked />
+          <label for="first-rate1" title="Terrible">1 star</label>
+          <input type="radio" id="first-rate2" name="review[rating]" value="2" />
+          <label for="first-rate2" title="Not good">2 stars</label>
+          <input type="radio" id="first-rate3" name="review[rating]" value="3" />
+          <label for="first-rate3" title="Average">3 stars</label>
+          <input type="radio" id="first-rate4" name="review[rating]" value="4" />
+          <label for="first-rate4" title="Very good">4 stars</label>
+          <input type="radio" id="first-rate5" name="review[rating]" value="5" />
+          <label for="first-rate5" title="Amazing">5 stars</label>
+        </fieldset>
+
+          <div class="mb-3">
+            <label for="review[body]" class="form-label">Review</label>
+            <textarea class="form-control" name="review[body]" id="body" rows="3" required></textarea>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+            <div class="invalid-feedback">
+              Field is required.
+            </div>
+          </div>
+          <button type="submit" class="btn btn-success">Submit</button>
+        </form>
+      <% } else {%>
+        <p>Login to leave review.</p>
+        <a class="btn btn-info text-light" href="/login">Login</a> 
+        <% } %>
+  </div>
+  </div>
+</body>

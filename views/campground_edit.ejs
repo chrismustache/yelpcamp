@@ -1,0 +1,30 @@
+<%- layout('layouts/boilerplate') -%>
+<body>
+    <h1>Edit campground</h1>
+
+    <section class="card text-bg-light">
+        <form class="card-body" action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" novalidate>
+            <div class="mb-3">
+              <label for="campground_name" class="form-label">Name</label>
+              <input type="text" class="form-control" name="campground[name]" id="camground-name" value="<%= campground.name %>" aria-describedby="campname" required>
+            </div>
+            <div class="mb-3">
+              <label for="campground_location" class="form-label">Location</label>
+              <input type="text" class="form-control" name="campground[location]" id="campground-location" value="<%= campground.location %>" required>
+            </div>
+            <div class="mb-3">
+                <label for="campground_description" class="form-label">Description</label>
+                <input type="text" class="form-control" name="campground[description]" id="campground-description" value="<%= campground.description %>" required>
+              </div>
+              <div class="mb-3">
+                <label for="campground_image" class="form-label">ImageUrl</label>
+                <input type="text" class="form-control" name="campground[Images]" id="campground-image" value="<%= campground.Images %>" required>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" for="campground_price">€</span>
+                <input type="text" class="form-control" name="campground[price]" value="<%= campground.price %>" aria-label="Amount (to the nearest euro)" required>
+              </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+          </form>
+    </section>
+  

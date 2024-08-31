@@ -1,0 +1,60 @@
+<%- layout('layouts/boilerplate') -%>
+    <h1>New campground</h1>
+
+    <section class="card text-bg-light">
+        <form class="card-body bg needs-validation" action="/campgrounds" method="POST" enctype="multipart/form-data" novalidate>
+            <div class="mb-3">
+              <label for="campground_name" class="form-label">Name</label>
+              <input type="text" class="form-control" name="campground[name]" id="camground-name" aria-describedby="campname" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Field is required.
+              </div>
+            </div>
+            <div class="mb-3">
+              <label for="campground_location" class="form-label">Location</label>
+              <input type="text" class="form-control" name="campground[location]" id="campground-location" required>
+              <div class="valid-feedback">
+                Looks good!
+              </div>
+              <div class="invalid-feedback">
+                Field is required.
+              </div>
+            </div>
+            <div class="mb-3">
+                <label for="campground_description" class="form-label">Description</label>
+                <input type="text" class="form-control" name="campground[description]" id="campground-description" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Field is required.
+                </div>
+              </div>
+              <div class="mb-3">
+                <label for="campground_image" class="form-label">ImageUrl</label>
+                <input type="file" class="form-control" name="campground[Images]" id="campground-image" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Field is required.
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <span class="input-group-text" for="campground_price">€</span>
+                <input type="text" class="form-control" name="campground[price]" aria-label="Amount (to the nearest euro)" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Field is required.
+                </div>
+              </div>
+            <button type="submit" class="btn btn-success">Submit</button>
+          </form>
+    </section>
+
+    
