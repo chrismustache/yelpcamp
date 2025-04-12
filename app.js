@@ -14,7 +14,12 @@ const methodOverride = require('method-override');
 const flash = require('connect-flash');
 var passport = require('passport');
 const userDb = require('./models/users');
-const {debugLog} = require("./utils/middleware")
+//const {debugLog} = require("./utils/middleware")
+
+
+//DOTENV
+
+require('dotenv').config()
 
 //Cookie setup
 
@@ -54,7 +59,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/yelp-camp')
 .then(() => {console.log("Connected to Database")})
 
 app.use(methodOverride('_method'));
-app.use( express.urlencoded({ extended: true, type:['application/x-www-form-urlencoded', 'multipart/form-data'] }))
+app.use( express.urlencoded({ extended: true }))
 
 
 // EJS setup
@@ -66,7 +71,7 @@ app.set('views' , path.join(__dirname , 'views'))
 
 app.use(express.static('public'));
 
-app.use(debugLog);
+//app.use(debugLog);
 
 
 //Set local variables for template rendering

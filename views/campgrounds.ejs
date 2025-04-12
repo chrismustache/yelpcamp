@@ -5,9 +5,10 @@
             <li class="card mb-2">
                 <div class="row">
                     <div class="col-6">
-                        <img class="img-fluid" src=<%= campground.Images %>>
+                        <% if (campground.Images.length !== 0) { %>
+                        <img class="img-fluid" src=<%= campground.Images[0].url %>>
                     </div>
-
+                        <% } %>
                     <div class="col">
                         <h2 class="card-title"><%= campground.name %></h2>
                         <p class="card-text"><span>Location:</span> <%= campground.location %></p>

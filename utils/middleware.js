@@ -57,8 +57,8 @@ module.exports.validateReview = (req, res, next) => {
     next();
 }
 
-module.exports.debugLog = (req, res, next) => {
+/* module.exports.debugLog = (req, res, next) => {
     console.log("Request body", req.body)
     console.log(req.file)
     next();
-}
+} */

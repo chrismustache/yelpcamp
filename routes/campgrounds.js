@@ -11,7 +11,7 @@ const session = require('express-session');
 
 const multer  = require('multer')
   
-const upload = multer({ dest: '../public/uploads' })
+const cloudinaryUpload = require('../cloudinaryUpload');
 
 router.use(session({
     secret: 'notsecret',
@@ -25,16 +25,15 @@ router.use(storePrevPath);
 
 router.route('/')
     .get(campgroundsView )
-   // .post(requireLogin, validateCampground , upload.single("campground[Images]") , campgroundsCreate)
-   .post(upload.single("campground[Images]"),(req,res) => {
-        res.send("IT WORKED!!")})
+    .post(requireLogin, validateCampground , cloudinaryUpload.array("campground_images") , campgroundsCreate)
+   
 
 
 router.get('/new' , requireLogin , campgroundsNew)
 
 router.route('/:id')
     .get(campgroundsSingle)
-    .put(requireLogin , isAuthor, validateCampground , campgroundsUpdate)
+    .put(requireLogin , isAuthor ,  validateCampground , cloudinaryUpload.array("campground_images") , campgroundsUpdate)
     .delete(campgroundsDelete)
 
 

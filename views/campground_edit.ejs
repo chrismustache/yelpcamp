@@ -3,7 +3,7 @@
     <h1>Edit campground</h1>
 
     <section class="card text-bg-light">
-        <form class="card-body" action="/campgrounds/<%= campground._id %>?_method=PUT" method="POST" novalidate>
+        <form class="card-body" action="/campgrounds/<%= campground._id %>?_method=PUT" enctype="multipart/form-data" method="POST" novalidate>
             <div class="mb-3">
               <label for="campground_name" class="form-label">Name</label>
               <input type="text" class="form-control" name="campground[name]" id="camground-name" value="<%= campground.name %>" aria-describedby="campname" required>
@@ -17,8 +17,31 @@
                 <input type="text" class="form-control" name="campground[description]" id="campground-description" value="<%= campground.description %>" required>
               </div>
               <div class="mb-3">
-                <label for="campground_image" class="form-label">ImageUrl</label>
-                <input type="text" class="form-control" name="campground[Images]" id="campground-image" value="<%= campground.Images %>" required>
+                <label for="campground_image" class="form-label">Add Images</label>
+                <input type="file" class="form-control" name="campground_images" id="campground_images" multiple required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Field is required.
+              </div>
+              <div class="mb-3"></div>
+                <h3 for="campground_image">Remove Images</h3>
+                <% for (let img of campground.Images) { %>
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" value="<%=img.filename %>" id="<%=img.filename %>" name="campgroundDeletedImages[]">
+                    <label class="form-check-label" for="<%=img.filename %>">
+                      Delete
+                    </label>
+                  </div>
+                  <img src="<%= img.thumbUrl %>">
+                <% } %>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+                <div class="invalid-feedback">
+                  Field is required.
+              </div>
               </div>
               <div class="input-group mb-3">
                 <span class="input-group-text" for="campground_price">€</span>
