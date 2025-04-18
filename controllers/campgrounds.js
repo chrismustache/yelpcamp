@@ -8,7 +8,7 @@ const cloudinary = require('cloudinary').v2;
 
 const maptilersdk = require ('@maptiler/sdk');
 
-maptilersdk.config.apiKey = 'GJiDKh5YqRadS8RdbasI';
+maptilersdk.config.apiKey = process.env.MAPTILER_API_KEY;
 
 const map = new maptilersdk.Map({
     container: 'map', // container's id or the HTML element in which SDK will render the map
